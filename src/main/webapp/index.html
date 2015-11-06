@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Rules UI Test</title>
+	<link href='//fonts.googleapis.com/css?family=Arimo:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+	<link rel="stylesheet">
+</head>
+<body style="font-family: Arimo;" ng-app="myapp" ng-controller='MyController'>
+<!--<h1>POS Tagger</h1>-->
+<h1>Parser</h1>
+<input type="text" class="form-input" ng-model="inputText" style="width:600px"/>
+<input type="submit" class="btn btn-primary" ng-click="getData()"/>
+<table class="table">
+	<tr ng-repeat="element in list track by $index">
+		<td>{{ element }}</td>
+	</tr>
+</table>
+</body>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"></script>
+<script	src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script	src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
+<script>
+	var app = angular.module('myapp', []);
+	
+	app.controller('MyController', ['$scope', '$http', function($scope, $http) {
+		$scope.elements = [];
+
+		<!--$scope.getData = function() {-->
+			<!--$http.get('/data/nlp/' + $scope.inputText).success(function(data, status, headers, config) { -->
+				<!--$scope.list = data;-->
+			<!--})-->
+			<!--.error(function(data, status, headers, config) {-->
+				<!--console.log(data); -->
+			<!--});	-->
+		<!--}-->
+
+		$scope.getData = function() {
+			$http.get('/data/nlpParser/' + $scope.inputText).success(function(data, status, headers, config) {
+				$scope.list = data;
+			})
+			.error(function(data, status, headers, config) {
+				console.log(data);
+			});
+		}
+
+	}]);
+</script>
+
+</html>
